@@ -6,14 +6,22 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectItems } from "../slices/basketSlice";
+
 const Header = () => {
   const { data: session } = useSession();
-  console.log(session.user.email);
+  const router = useRouter();
+  const items = useSelector(selectItems);
   return (
     <header>
       {/* Top */}
       <div className="flex flex-grow items-center bg-amazon_blue p-1 py-2">
-        <div className="mt-2 flex flex-grow items-center sm:flex-grow-0">
+        <div
+          onClick={() => router.push("/")}
+          className="mt-2 flex flex-grow items-center sm:flex-grow-0"
+        >
           <Image
             src="https://links.papareact.com/f90"
             width={150}
@@ -32,17 +40,20 @@ const Header = () => {
         </div>
         {/* Right */}
         <div className="mx-6 flex items-center space-x-6 whitespace-nowrap text-xs text-white">
-          <div className="link" onClick={signIn}>
-            <p>Hello Me</p>
+          <div className="link" onClick={!session ? signIn : signOut}>
+            <p>{session ? "Hello, " + session.user.name : "Hello Me"}</p>
             <p className="font-extrabold md:text-sm">Account & Lists</p>
           </div>
           <div className="link">
             <p>Returns</p>
             <p className="font-extrabold md:text-sm">& orders</p>
           </div>
-          <div className="link relative flex items-center">
+          <div
+            onClick={() => router.push("/checkout")}
+            className="link relative flex items-center"
+          >
             <span className="absolute right-0 top-0 h-4 w-4 rounded-full bg-yellow-400 text-center font-bold text-black md:right-10">
-              0
+              {items.length}
             </span>
             <ShoppingCartIcon className="h-10" />
             <p className="mt-2 hidden font-extrabold md:inline md:text-sm">
