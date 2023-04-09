@@ -40,6 +40,7 @@ const Product = ({ id, title, price, description, category, image }) => {
         src={image}
         height={200}
         width={200}
+        alt=""
         className="!mx-auto !max-h-[200px]  !max-w-[200px] !flex-grow !object-contain"
       />
       <h4 className="my-3">{title}</h4>

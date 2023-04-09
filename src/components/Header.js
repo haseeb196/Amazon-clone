@@ -26,6 +26,7 @@ const Header = () => {
             src="https://links.papareact.com/f90"
             width={150}
             height={40}
+            alt=""
             className="!mx-auto !max-h-[40px] !max-w-[150px] !flex-grow !cursor-pointer !object-contain"
           />
         </div>

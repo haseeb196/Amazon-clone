@@ -11,10 +11,12 @@
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "1.5.0",
+    "@stripe/stripe-js": "^1.52.0",
     "@tailwindcss/line-clamp": "^0.2.0",
     "firebase": "^8.6.1",
-    "firebase-admin": "^9.8.0",
+    "firebase-admin": "^11.6.0",
     "heroicons": "^2.0.17",
+    "micro": "^10.0.1",
     "next": "^13.3.0",
     "next-auth": "^4.21.1",
     "prettier": "^2.8.7",
@@ -23,7 +25,8 @@
     "react-dom": "^18.2.0",
     "react-number-format": "^5.1.4",
     "react-redux": "^8.0.5",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "stripe": "^12.0.0"
   },
   "license": "MIT",
   "devDependencies": {

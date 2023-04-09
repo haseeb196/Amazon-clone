@@ -38,7 +38,8 @@ const CheckoutProduct = ({
         src={image}
         width={200}
         height={200}
-        className="!mx-auto !max-h-[200px] !max-w-[200px] !flex-grow !object-contain"
+        alt=""
+        className="!mx-auto !max-h-[200px] !w-full !max-w-[200px] !flex-grow !object-contain"
       />
       {/* Middle */}
       <div className="col-span-3 mx-5">
