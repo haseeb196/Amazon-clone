@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/solid";
-import CurrencyFormat from "react-currency-format";
+
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../slices/basketSlice";
+import { NumericFormat } from "react-number-format";
+
 const Product = ({ id, title, price, description, category, image }) => {
   const [rating, setRating] = useState(2);
   const [hasPrime, setHasPrime] = useState();
@@ -34,7 +36,12 @@ const Product = ({ id, title, price, description, category, image }) => {
       <p className="absolute right-2 top-2 text-xs italic text-gray-400">
         {category}
       </p>
-      <Image src={image} height={200} width={200} objectFit="contain" />
+      <Image
+        src={image}
+        height={200}
+        width={200}
+        className="!mx-auto !max-h-[200px]  !max-w-[200px] !flex-grow !object-contain"
+      />
       <h4 className="my-3">{title}</h4>
       <div className="flex">
         {Array(rating)
@@ -45,7 +52,7 @@ const Product = ({ id, title, price, description, category, image }) => {
       </div>
       <p className="my-2 text-xs line-clamp-2">{description}</p>
       <div className="mb-5">
-        <CurrencyFormat
+        <NumericFormat
           value={price}
           displayType="text"
           thousandSeparator={true}
@@ -64,5 +71,4 @@ const Product = ({ id, title, price, description, category, image }) => {
     </div>
   );
 };
-
 export default Product;

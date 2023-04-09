@@ -15,19 +15,18 @@ const Header = () => {
   const router = useRouter();
   const items = useSelector(selectItems);
   return (
-    <header>
+    <header className="sticky top-0 z-50">
       {/* Top */}
       <div className="flex flex-grow items-center bg-amazon_blue p-1 py-2">
         <div
           onClick={() => router.push("/")}
-          className="mt-2 flex flex-grow items-center sm:flex-grow-0"
+          className="relative mt-2 flex  flex-grow  items-center sm:flex-grow-0"
         >
           <Image
             src="https://links.papareact.com/f90"
             width={150}
             height={40}
-            objectFit="contain"
-            className="cursor-pointer"
+            className="!mx-auto !max-h-[40px] !max-w-[150px] !flex-grow !cursor-pointer !object-contain"
           />
         </div>
         {/* search */}

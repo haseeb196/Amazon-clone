@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { addToBasket, removeFromBasket } from "../slices/basketSlice";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/solid";
-import CurrencyFormat from "react-currency-format";
+import { NumericFormat } from "react-number-format";
+
 const CheckoutProduct = ({
   id,
   title,
@@ -33,7 +34,12 @@ const CheckoutProduct = ({
   };
   return (
     <div className="grid grid-cols-5">
-      <Image src={image} width={200} height={200} objectFit="contain" />
+      <Image
+        src={image}
+        width={200}
+        height={200}
+        className="!mx-auto !max-h-[200px] !max-w-[200px] !flex-grow !object-contain"
+      />
       {/* Middle */}
       <div className="col-span-3 mx-5">
         <p>{title}</p>
@@ -45,7 +51,7 @@ const CheckoutProduct = ({
             })}
         </div>
         <p className="my-2 text-xs line-clamp-3">{description}</p>
-        <CurrencyFormat
+        <NumericFormat
           value={price}
           displayType="text"
           thousandSeparator={true}

@@ -53,5 +53,4 @@ const ProductFeed = ({ products }) => {
     </div>
   );
 };
-
 export default ProductFeed;
