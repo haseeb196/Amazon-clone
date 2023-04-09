@@ -80,34 +80,32 @@ const Checkout = () => {
           </div>
         </div>
         {/* Right */}
-        <div className="flex flex-col bg-white p-10 shadow-md">
-          {items.length > 0 && (
-            <>
-              <h2 className="whitespace-nowrap">
-                Subtotal ({items.length} items):{" "}
-                <span className="font-bold">
-                  <NumericFormat
-                    value={total}
-                    displayType="text"
-                    thousandSeparator={true}
-                    prefix="£"
-                  />
-                </span>
-              </h2>
-              <button
-                role="link"
-                onClick={createCheckoutSession}
-                disabled={!session}
-                className={`button mt-2 ${
-                  !session &&
-                  "cursor-not-allowed border-gray-200 from-gray-300 to-gray-500 text-gray-300"
-                }`}
-              >
-                {!session ? "Sign in to checkout" : "Proceed to checkout"}
-              </button>
-            </>
-          )}
-        </div>
+        {items?.length > 0 && (
+          <div className="flex flex-col bg-white p-10 shadow-md">
+            <h2 className="whitespace-nowrap">
+              Subtotal ({items.length} items):{" "}
+              <span className="font-bold">
+                <NumericFormat
+                  value={total}
+                  displayType="text"
+                  thousandSeparator={true}
+                  prefix="£"
+                />
+              </span>
+            </h2>
+            <button
+              role="link"
+              onClick={createCheckoutSession}
+              disabled={!session}
+              className={`button mt-2 ${
+                !session &&
+                "cursor-not-allowed border-gray-200 from-gray-300 to-gray-500 text-gray-300"
+              }`}
+            >
+              {!session ? "Sign in to checkout" : "Proceed to checkout"}
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );
