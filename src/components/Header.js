@@ -53,7 +53,7 @@ const Header = () => {
             className="link relative flex items-center"
           >
             <span className="absolute right-0 top-0 h-4 w-4 rounded-full bg-yellow-400 text-center font-bold text-black md:right-10">
-              {items.length}
+              {items?.reduce((total, current) => total + current.quantity, 0)}
             </span>
             <ShoppingCartIcon className="h-10" />
             <p className="mt-2 hidden font-extrabold md:inline md:text-sm">

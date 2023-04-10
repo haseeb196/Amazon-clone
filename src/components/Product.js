@@ -1,24 +1,46 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { StarIcon } from "@heroicons/react/solid";
+import { MinusSmIcon, PlusSmIcon, StarIcon } from "@heroicons/react/solid";
 
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../slices/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToBasket,
+  decreaseQuantity,
+  increaseQuantity,
+  selectItems,
+} from "../slices/basketSlice";
 import { NumericFormat } from "react-number-format";
 
 const Product = ({ id, title, price, description, category, image }) => {
   const [rating, setRating] = useState(2);
+  const items = useSelector(selectItems);
   const [hasPrime, setHasPrime] = useState();
   const dispatch = useDispatch();
   const max_rating = 5;
   const min_rating = 1;
+  const data = [...items?.filter((x) => x.id === id)];
+  const [quantity, setQuantity] = useState(0);
+  useEffect(() => {
+    if (data[0]?.quantity > 0) {
+      setQuantity(data[0]?.quantity);
+    }
+  }, [data]);
   useEffect(() => {
     setRating(
       Math.floor(Math.random() * (max_rating - min_rating + 1)) + min_rating
     );
     setHasPrime(Math.random() < 0.5);
   }, []);
+  const Increasequantity = () => {
+    setQuantity((prev) => prev + 1);
+    dispatch(increaseQuantity({ id: id }));
+  };
+  const Decreasequantity = () => {
+    setQuantity((prev) => prev - 1);
+    dispatch(decreaseQuantity({ id: id }));
+  };
   const addItemsToBasket = () => {
+    setQuantity(1);
     const product = {
       id,
       title,
@@ -28,6 +50,7 @@ const Product = ({ id, title, price, description, category, image }) => {
       image,
       rating,
       hasPrime,
+      quantity: 1,
     };
     dispatch(addToBasket(product));
   };
@@ -66,9 +89,19 @@ const Product = ({ id, title, price, description, category, image }) => {
           <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
         </div>
       )}
-      <button onClick={addItemsToBasket} className="button mt-auto">
-        Add to Basket
-      </button>
+      {quantity > 0 ? (
+        <div className="mt-auto flex items-center justify-between">
+          <MinusSmIcon className="w-7 border p-1" onClick={Decreasequantity} />
+          {quantity}
+          <PlusSmIcon className="w-7 border p-1" onClick={Increasequantity} />
+        </div>
+      ) : (
+        <>
+          <button onClick={addItemsToBasket} className="button mt-auto">
+            Add to Basket
+          </button>
+        </>
+      )}
     </div>
   );
 };

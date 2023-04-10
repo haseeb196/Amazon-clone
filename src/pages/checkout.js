@@ -61,6 +61,7 @@ const Checkout = () => {
                   category,
                   image,
                   hasPrime,
+                  quantity,
                 },
                 i
               ) => (
@@ -74,6 +75,7 @@ const Checkout = () => {
                   image={image}
                   hasPrime={hasPrime}
                   rating={rating}
+                  quantity={quantity}
                 />
               )
             )}
@@ -83,7 +85,9 @@ const Checkout = () => {
         {items?.length > 0 && (
           <div className="flex flex-col bg-white p-10 shadow-md">
             <h2 className="whitespace-nowrap">
-              Subtotal ({items.length} items):{" "}
+              Subtotal (
+              {items?.reduce((total, current) => total + current.quantity, 0)}{" "}
+              items):{" "}
               <span className="font-bold">
                 <NumericFormat
                   value={total}

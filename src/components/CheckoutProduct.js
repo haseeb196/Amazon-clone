@@ -1,8 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToBasket, removeFromBasket } from "../slices/basketSlice";
+import {
+  addToBasket,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../slices/basketSlice";
 import Image from "next/image";
-import { StarIcon } from "@heroicons/react/solid";
+import { MinusSmIcon, PlusSmIcon, StarIcon } from "@heroicons/react/solid";
 import { NumericFormat } from "react-number-format";
 
 const CheckoutProduct = ({
@@ -14,7 +18,14 @@ const CheckoutProduct = ({
   image,
   hasPrime,
   rating,
+  quantity,
 }) => {
+  const Increasequantity = () => {
+    dispatch(increaseQuantity({ id: id }));
+  };
+  const Decreasequantity = () => {
+    dispatch(decreaseQuantity({ id: id }));
+  };
   const product = {
     id,
     title,
@@ -29,9 +40,7 @@ const CheckoutProduct = ({
   const addItemsToBasket = () => {
     dispatch(addToBasket(product));
   };
-  const removeItemFromBasket = () => {
-    dispatch(removeFromBasket({ id }));
-  };
+
   return (
     <div className="grid grid-cols-5">
       <Image
@@ -71,13 +80,11 @@ const CheckoutProduct = ({
         )}
       </div>
       {/* Right add/remove buttons */}
-      <div className="my-auto flex flex-col space-y-2 justify-self-end">
-        <button className="button" onClick={addItemsToBasket}>
-          Add to Basket
-        </button>
-        <button className="button" onClick={removeItemFromBasket}>
-          Remove from Basket
-        </button>
+
+      <div className="my-auto flex items-center justify-between space-x-4">
+        <MinusSmIcon className="w-7 border p-1" onClick={Decreasequantity} />
+        {quantity}
+        <PlusSmIcon className="w-7 border p-1" onClick={Increasequantity} />
       </div>
     </div>
   );

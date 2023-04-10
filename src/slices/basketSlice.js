@@ -11,22 +11,34 @@ export const basketSlice = createSlice({
     addToBasket: (state, action) => {
       state.items = [...state.items, action.payload];
     },
-    removeFromBasket: (state, action) => {
-      const index = state.items.findIndex(
-        (items) => items.id === action.payload.id
-      );
-      let newBasket = [...state.items];
-      if (index >= 0) {
-        newBasket.splice(index, 1);
-      } else {
-        console.warn(`Cant remove product (id: ${action.payload.id})`);
+
+    increaseQuantity: (state, action) => {
+      let item = state.items.find((i) => i.id === action.payload.id);
+      if (item) {
+        item.quantity = item.quantity + 1;
+        item.price = item.price * item.quantity + 1;
       }
-      state.items = newBasket;
+    },
+    decreaseQuantity: (state, action) => {
+      let item = state.items.find((i) => i.id === action.payload.id);
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity = item.quantity - 1;
+          item.price = item.price / item.quantity - 1;
+        } else if (item.quantity === 1) {
+          state.items = state.items.filter((x) => x.id !== action.payload.id);
+        }
+      }
     },
   },
 });
 
-export const { addToBasket, removeFromBasket } = basketSlice.actions;
+export const {
+  addToBasket,
+
+  increaseQuantity,
+  decreaseQuantity,
+} = basketSlice.actions;
 
 // Selectors - This is how we pull information from the Global store slice
 export const selectItems = (state) => state.basket.items;
