@@ -1,8 +1,23 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
+import OrderImage from "./OrderImage";
 
 const Order = ({ id, amount, amountShipping, items, timestamp, images }) => {
+  const [eachitem, setEachitem] = useState();
+  const foritems = async () => {
+    const data = [];
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const image = images[i];
+      data.push({ quantity: item.quantity, image });
+    }
+    setEachitem(data);
+  };
+  useEffect(() => {
+    foritems();
+  }, []);
+
   return (
     <div className="relative rounded-md border">
       <div className="flex items-center space-x-10 bg-gray-100 p-5 text-sm text-gray-600">
@@ -38,8 +53,8 @@ const Order = ({ id, amount, amountShipping, items, timestamp, images }) => {
       </div>
       <div className="p-5 sm:p-10">
         <div className="flex space-x-6 overflow-x-auto">
-          {images.map((image) => (
-            <img src={image} alt="" className="h-20 object-contain sm:h-32" />
+          {eachitem?.map((x, i) => (
+            <OrderImage quantity={x.quantity} image={x.image} key={i} />
           ))}
         </div>
       </div>
