@@ -1,4 +1,5 @@
 ![amazon-clone](https://amazon-clone13.vercel.app/amzon-clone-img.png)
+
 # Amazon Clone with Stripe Payment Method
 
 This project is a clone of the Amazon website with Stripe payment method integration. It also includes user login using Next Auth, Server-Side Rendering (SSR) using Next.js, Firebase Admin for server-side functionality, Tailwind CSS for styling, and Redux for state management.
@@ -13,6 +14,22 @@ To get started with this project, follow the steps below:
 - Create a random Next secret and add it to your .env.local file
 - Create a Stripe account and get a public key and secret key, then add them to your .env.local file
 - Add the URL to cloud.google.com.
+- Download the Firebase SDK file, rename it to permissions.json and add it to your project directory.
+- Initialize the Firebase app:
+- Create a new file called firebase.js in your project's directory.
+- In the firebase.js file, add the following code:
+ ```javascript 
+ import firebase from "firebase";
+ const firebaseConfig = {
+// add your Firebase config here
+};
+
+const app = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+export const db = app.firestore();
+
 - Start the server by running `npm run dev` in your terminal
 - Install Stripe CLI and run stripe `listen --forward-to localhost:3000` in a new terminal window
   Obtain the STRIPE_SIGNING_SECRET and add it to your .env.local file.

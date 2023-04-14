@@ -32,3 +32,8 @@ yarn-error.log*
 
 # vercel
 .vercel
+ 
+#firebase
+Firebase.js
+#firebase admin sdk file
+permissions.json
