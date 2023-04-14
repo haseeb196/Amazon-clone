@@ -18,10 +18,11 @@ To get started with this project, follow the steps below:
 - Initialize the Firebase app:
 - Create a new file called firebase.js in your project's directory.
 - In the firebase.js file, add the following code:
- ```javascript 
- import firebase from "firebase";
- const firebaseConfig = {
-// add your Firebase config here
+
+```javascript
+import firebase from "firebase";
+const firebaseConfig = {
+  // add your Firebase config here
 };
 
 const app = !firebase.apps.length
@@ -29,6 +30,7 @@ const app = !firebase.apps.length
   : firebase.app();
 
 export const db = app.firestore();
+```
 
 - Start the server by running `npm run dev` in your terminal
 - Install Stripe CLI and run stripe `listen --forward-to localhost:3000` in a new terminal window
