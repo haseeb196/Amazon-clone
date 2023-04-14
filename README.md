@@ -1,4 +1,4 @@
-![amazon-clone](https://amzon-clone13.vercel.app/amazon-clone-img.png)
+![amazon-clone](https://amazon-clone13.vercel.app/amazon-clone-img.png)
 # Amazon Clone with Stripe Payment Method
 
 This project is a clone of the Amazon website with Stripe payment method integration. It also includes user login using Next Auth, Server-Side Rendering (SSR) using Next.js, Firebase Admin for server-side functionality, Tailwind CSS for styling, and Redux for state management.
